@@ -1,8 +1,7 @@
 <h1>ExpNo 1 :Developing AI Agent with PEAS Description</h1>
-<h3>Name: Logesh B <h3>
-<h3>Register Number:212224110034</h3>
-<h3>Date: 15/10/2026</h3>
-
+<h3>Name: Logesh B</h3>
+<h3>Register Number : 212224110034</h3
+<h3>Date : 15/10/2026 <h3>
 
 <h3>AIM:</h3>
 <br>
@@ -41,58 +40,59 @@
 <p>Treat unhealthy patients in each room. And check for the unhealthy patients in random room</p>
 <h3>STEP 5:</h3>
 <p>Measure the performance parameters: For each treatment performance incremented, for each movement performance decremented</p>
-<h1>PROGRAM</h1>
 
+## PROGRAM:
+```.py
+class MedicinePrescribingAgent:
+    def __init__(self):
+        self.rooms = {
+            "Room 1": random.uniform(97.0, 102.5),
+            "Room 2": random.uniform(97.0, 102.5)
+        }
+        self.performance = 0
+        self.current_room = random.choice(list(self.rooms.keys()))
 
-        class VacuumCleanerAgent:
-            def __init__(self):
-                self.location = "A"  # Initial location (can be "A" or "B")
-                self.dirt_status = {"A": False, "B": False}  # Initial dirt status (False means no dirt)
-        
-            def move_left(self):
-                if self.location == "B":
-                    self.location = "A"
-        
-            def move_right(self):
-                if self.location == "A":
-                    self.location = "B"
-        
-            def suck_dirt(self):
-                if self.dirt_status[self.location]:
-                    self.dirt_status[self.location] = False
-                    print(f"Sucked dirt in location {self.location}")
-        
-            def do_nothing(self):
-                pass
-        
-            def perform_action(self, action):
-                if action == "left":
-                    self.move_left()
-                elif action == "right":
-                    self.move_right()
-                elif action == "suck":
-                    self.suck_dirt()
-                elif action == "nothing":
-                    self.do_nothing()
-                else:
-                    print("Invalid action")
-        
-            def print_status(self):
-                print(f"Location: {self.location}, Dirt Status: {self.dirt_status}")
-        
-        agent = VacuumCleanerAgent()
-        
-        
-        agent.perform_action("left")
-        agent.print_status()
-        agent.perform_action("suck")
-        agent.print_status()
-        agent.perform_action("nothing")
-        agent.print_status()
+    def sense(self):
+        """Sense current room and patient's temperature."""
+        temperature = self.rooms[self.current_room]
+        print(f"\nAgent is in {self.current_room}")
+        print(f"Patient Temperature: {temperature:.1f}°F")
+        return temperature
 
-<h1>OUTPUT</h1>  
+    def prescribe_medicine(self, temperature):
+        """Treat patient if temperature is above 98.5°F."""
+        if temperature > 98.5:
+            print("Patient has fever.")
+            print("Medicine Prescribed.")
+            self.performance += 1
+        else:
+            print("Patient is healthy.")
+            print("No medicine required.")
 
-<img width="805" height="190" alt="487157507-2fce4fdd-2923-4923-bd10-065b3063d542" src="https://github.com/user-attachments/assets/ae142843-8ff7-4f07-9528-47a9f4c55aa3" />
+    def move(self):
+        """Move to the other room."""
+        previous_room = self.current_room
+        self.current_room = "Room 2" if self.current_room == "Room 1" else "Room 1"
+        print(f"\nMoving from {previous_room} to {self.current_room}")
+        self.performance -= 1
 
-<h1>RESULT:</h1>
-Thus the Developing AI Agent with PEAS Description was implemented using python programming.
+    def run(self):
+        print("=== Medicine Prescribing Agent ===")
+        temperature = self.sense()
+        self.prescribe_medicine(temperature)
+        self.move()
+        temperature = self.sense()
+        self.prescribe_medicine(temperature)
+        print("\nFinal Performance:", self.performance)
+
+agent = MedicinePrescribingAgent()
+agent.run()
+```
+
+## OUTPUT
+
+<img width="404" height="256" alt="Screenshot 2026-10-15 104450" src="https://github.com/user-attachments/assets/7b36eb4d-2798-47c5-9d7c-65a473870299" />
+
+## RESULT
+
+Successfully developed an AI agent using the PEAS (Performance Measure, Environment, Actuators, and Sensors) framework to define its goals, environment, actions, and perception.
